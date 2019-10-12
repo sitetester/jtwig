@@ -12,7 +12,7 @@ public class App {
     public static JTwig jtwig;
 
     public App() {
-        this.jtwig = new JTwig();
+        App.jtwig = new JTwig();
     }
 
     public static void main(String[] args) throws IOException {
