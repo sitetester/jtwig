@@ -16,18 +16,6 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
-        /*String nextLine = "Welcome, {{ username }}";
-
-        String regex = "\\{\\{.+\\}\\}";
-        Pattern r = Pattern.compile(regex);
-        String replaced = nextLine.replaceAll(regex, "sitetester");
-        System.out.println(replaced);*/
-
-
-       /* String replaced = nextLine.replaceAll(pattern, "sitetester");
-        System.out.println(replaced);*/
-
-
         String filename = "welcome.html";
         Map<String, String> data = new HashMap<>();
         data.put("title", "My blog");
