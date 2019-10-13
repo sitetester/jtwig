@@ -87,6 +87,15 @@ public class JTwigFilters {
         return value.toLowerCase();
     }
 
+    public String capitalize(String value) {
+        String lowerCased = value.toLowerCase();
+
+        String firstLetter = lowerCased.substring(0, 1).toUpperCase();
+        String remainingChars = lowerCased.substring(1, lowerCased.length());
+
+        return firstLetter + remainingChars;
+    }
+
     public String title(String value) {
         // return value.to();
         // TODO: pending
