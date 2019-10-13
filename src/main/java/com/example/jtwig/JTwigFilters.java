@@ -106,4 +106,7 @@ public class JTwigFilters {
         return value;
     }
 
+    public String abs(String value) {
+        return String.valueOf(Math.abs(Integer.valueOf(value)));
+    }
 }

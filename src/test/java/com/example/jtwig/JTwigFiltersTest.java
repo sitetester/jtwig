@@ -68,4 +68,17 @@ public class JTwigFiltersTest {
         String content2 = new JTwigTemplateParser().parseTemplate(path, data2);
         assertTrue(content2.contains("var is not defined"));
     }
+
+
+    @Test
+    public void abs() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someNumber", "-11");
+
+        Path path = Paths.get("src/test/resources/filters/abs", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("11"));
+    }
 }

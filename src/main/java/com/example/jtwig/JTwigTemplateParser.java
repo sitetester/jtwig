@@ -35,6 +35,8 @@ public class JTwigTemplateParser {
                     String filter = "";
                     if (filterWithParams.indexOf("(") > 0) {
                         filter = filterWithParams.substring(0, filterWithParams.indexOf("("));
+                    } else {
+                        filter = filterWithParams;
                     }
 
                     if (jTwigFilters.hasFilter(filter)) {
