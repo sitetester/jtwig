@@ -1,11 +1,13 @@
 package com.example.jtwig;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class JTwigFilters {
 
-    public static ArrayList<String> getFilters() {
-        ArrayList<String> filters = new ArrayList<String>();
+    public ArrayList<String> getFilters() {
+        ArrayList<String> filters = new ArrayList<>();
 
         filters.add("abs");
         filters.add("batch");
@@ -59,5 +61,35 @@ public class JTwigFilters {
         filters.add("url_encode");
 
         return filters;
+    }
+
+    public boolean hasFilter(String filter) throws UnsupportedJTwigFilterException {
+        if (!this.getFilters().contains(filter)) {
+            throw new UnsupportedJTwigFilterException("This filter is currently not supported.");
+        }
+
+        return this.getFilters().contains(filter);
+    }
+
+    public String applyFilter(String filter, String value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        Method method = JTwigFilters.class.getMethod(filter, String.class);
+        JTwigFilters jTwigFilters = new JTwigFilters();
+
+        return (String) method.invoke(jTwigFilters, value);
+    }
+
+    public String upper(String value) {
+        return value.toUpperCase();
+    }
+
+    public String lower(String value) {
+        return value.toLowerCase();
+    }
+
+    public String title(String value) {
+        // return value.to();
+        // TODO: pending
+        return "";
     }
 }
