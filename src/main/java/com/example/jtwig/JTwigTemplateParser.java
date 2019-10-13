@@ -25,13 +25,23 @@ public class JTwigTemplateParser {
                 JTwigFilters jTwigFilters = new JTwigFilters();
                 String arg = pair.getValue();
 
-                if (matcher.group(3).trim().length() == 0) {
+                String filterWithParams = matcher.group(3).trim();
+
+                if (filterWithParams.length() == 0) {
                     content = content.replaceAll(regex, arg) + "\n";
                 } else {
-                    String filter = matcher.group(3).trim();
                     String appliedValue = "";
 
+                    String filter = "";
+                    if (filterWithParams.indexOf("(") > 0) {
+                        filter = filterWithParams.substring(0, filterWithParams.indexOf("("));
+                    }
+
                     if (jTwigFilters.hasFilter(filter)) {
+                        if (pair.getValue().trim().length() == 0) {
+                            arg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")"));
+                        }
+
                         appliedValue = jTwigFilters.applyFilter(filter, arg);
                     }
 

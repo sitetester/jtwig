@@ -19,7 +19,7 @@ public class JTwigFilters {
         filters.add("data_uri");
         filters.add("date");
         filters.add("date_modify");
-        filters.add("default");
+        filters.add("defaultVal");
         filters.add("escape");
         filters.add("filter");
         filters.add("format");
@@ -87,6 +87,12 @@ public class JTwigFilters {
         return value.toLowerCase();
     }
 
+    public String title(String value) {
+        // return value.to();
+        // TODO: pending
+        return "";
+    }
+
     public String capitalize(String value) {
         String lowerCased = value.toLowerCase();
 
@@ -96,9 +102,8 @@ public class JTwigFilters {
         return firstLetter + remainingChars;
     }
 
-    public String title(String value) {
-        // return value.to();
-        // TODO: pending
-        return "";
+    public String defaultVal(String value) {
+        return value;
     }
+
 }

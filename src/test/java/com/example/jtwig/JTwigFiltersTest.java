@@ -48,4 +48,24 @@ public class JTwigFiltersTest {
         String content = new JTwigTemplateParser().parseTemplate(path, data);
         assertTrue(content.contains("My blog"));
     }
+
+    @Test
+    public void defaultVal() throws IOException, InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException {
+
+        // case 1: given variable is NOT empty
+        Map<String, String> data1 = new HashMap<>();
+        data1.put("title", "abc");
+
+        Path path = Paths.get("src/test/resources/filters/defaultVal", "welcome.html");
+
+        String content1 = new JTwigTemplateParser().parseTemplate(path, data1);
+        assertTrue(content1.contains("abc"));
+
+        // case 2: given variable IS empty
+        Map<String, String> data2 = new HashMap<>();
+        data2.put("title", "");
+
+        String content2 = new JTwigTemplateParser().parseTemplate(path, data2);
+        assertTrue(content2.contains("var is not defined"));
+    }
 }

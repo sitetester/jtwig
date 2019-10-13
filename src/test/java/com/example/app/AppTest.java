@@ -37,7 +37,7 @@ public class AppTest {
         Map<String, String> data = new HashMap<>();
         data.put("title", "My blog");
 
-        String content = "<title> {{title|lower }}</title>";
+        String content = "<title> {{title|defaultVal(\"var is not defined\") }}</title>";
 
         for (Map.Entry<String, String> pair : data.entrySet()) {
             String regex = "\\{\\{\\s*((" + pair.getKey() + ")\\|(.+)" + ")\\s*\\}\\}";
@@ -56,6 +56,12 @@ public class AppTest {
 
                 String filter = matcher.group(3).trim();
                 String appliedValue = "";
+
+                System.out.println(filter.indexOf("("));
+                System.out.println(filter.substring(0, filter.indexOf("(")));
+                // System.out.println(filter.substring(filter.indexOf("(") + 1, filter.indexOf(")")));
+                String defaultValParam = filter.substring(filter.indexOf("(") + 2, filter.indexOf(")") - 1);
+                System.out.println(defaultValParam);
 
                 if (jTwigFilters.hasFilter(filter)) {
                     String arg = pair.getValue();
