@@ -81,4 +81,16 @@ public class JTwigFiltersTest {
         String content = new JTwigTemplateParser().parseTemplate(path, data);
         assertTrue(content.contains("11"));
     }
+
+    @Test
+    public void nl2br() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someText", "This is line#1.\nThis is line#2.\nThis is line#3.");
+
+        Path path = Paths.get("src/test/resources/filters/nl2br", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("This is line#1.</br>This is line#2.</br>This is line#3."));
+    }
 }

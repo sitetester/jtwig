@@ -109,4 +109,8 @@ public class JTwigFilters {
     public String abs(String value) {
         return String.valueOf(Math.abs(Integer.valueOf(value)));
     }
+
+    public String nl2br(String value) {
+        return value.replace("\n", "</br>");
+    }
 }
