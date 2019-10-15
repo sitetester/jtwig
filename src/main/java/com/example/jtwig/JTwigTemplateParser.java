@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,7 +45,13 @@ public class JTwigTemplateParser {
                             arg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")"));
                         }
 
-                        appliedValue = jTwigFilters.applyFilter(filter, arg);
+                        String filterArg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")") - 1);
+
+                        ArrayList<String> filterArgs = new ArrayList<>();
+                        filterArgs.add(arg);
+                        filterArgs.add(filterArg);
+
+                        appliedValue = jTwigFilters.applyFilter(filter, filterArgs);
                     }
 
                     content = content.replaceAll(regex, appliedValue) + "\n";

@@ -71,12 +71,12 @@ public class JTwigFilters {
         return this.getFilters().contains(filter);
     }
 
-    public String applyFilter(String filter, String value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public String applyFilter(String filter, ArrayList<String> filterArgs) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        Method method = JTwigFilters.class.getMethod(filter, String.class);
+        Method method = JTwigFilters.class.getMethod(filter, ArrayList.class);
         JTwigFilters jTwigFilters = new JTwigFilters();
 
-        return (String) method.invoke(jTwigFilters, value);
+        return (String) method.invoke(jTwigFilters, filterArgs);
     }
 
     public String upper(String value) {
@@ -112,5 +112,20 @@ public class JTwigFilters {
 
     public String nl2br(String value) {
         return value.replace("\n", "</br>");
+    }
+
+    public String join(ArrayList<String> filterArgs) {
+        String[] parts = filterArgs.get(0).split(",");
+
+        String partsJoined = "";
+        int counter = 0;
+        for (String part : parts) {
+            counter++;
+            if (counter > 0) {
+                partsJoined += filterArgs.get(1) + part.trim();
+            }
+        }
+
+        return partsJoined;
     }
 }

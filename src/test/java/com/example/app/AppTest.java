@@ -65,7 +65,7 @@ public class AppTest {
 
                 if (jTwigFilters.hasFilter(filter)) {
                     String arg = pair.getValue();
-                    appliedValue = jTwigFilters.applyFilter(filter, arg);
+                    // appliedValue = jTwigFilters.applyFilter(filter, arg);
                 }
 
                 content = content.replaceAll(regex, appliedValue) + "\n";
