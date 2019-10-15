@@ -107,6 +107,18 @@ public class JTwigFiltersTest {
     }
 
     @Test
+    public void split() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someText", "one,two,three");
+
+        Path path = Paths.get("src/test/resources/filters/split", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("[one, two, three]"));
+    }
+
+    @Test
     public void first() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
 
         Map<String, String> data = new HashMap<>();

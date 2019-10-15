@@ -129,6 +129,29 @@ public class JTwigFilters {
         return partsJoined;
     }
 
+    public String split(ArrayList<String> filterArgs) {
+
+        String partsJoined = "[";
+
+        if (filterArgs.get(0).indexOf(",") > 0) {
+            String[] parts = filterArgs.get(0).split(",");
+
+            int counter = 0;
+            for (String part : parts) {
+                counter++;
+                if (counter > 1) {
+                    partsJoined += filterArgs.get(1) + " ";
+                }
+
+                partsJoined += part.trim();
+            }
+
+            partsJoined += "]";
+        }
+
+        return partsJoined;
+    }
+
     public String first(ArrayList<String> filterArgs) {
         String[] parts = filterArgs.get(0).split(",");
 
