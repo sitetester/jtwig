@@ -12,9 +12,32 @@ import java.util.regex.Pattern;
 
 public class JTwigTemplateParser {
 
+    private String checkIfFunctionUsed(String content) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        String regex = "\\{\\{\\s*((.+)\\((.+)\\))\\s*\\}\\}";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        if (matcher.find()) {
+            ArrayList<String> args = new ArrayList<>();
+            args.add(matcher.group(3));
+
+            JTwigFunctions jTwigFunctions = new JTwigFunctions();
+            String appliedValue = jTwigFunctions.applyFunction(matcher.group(2).trim(), args);
+
+            return content.replaceAll(regex, appliedValue);
+        }
+
+        return "";
+    }
+
     public String parseTemplate(Path path, Map<String, String> data) throws IOException, UnsupportedJTwigFilterException, NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
         String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+
+        String updatedContent = this.checkIfFunctionUsed(content);
+        if (updatedContent != "") {
+            return updatedContent;
+        }
 
         for (Map.Entry<String, String> pair : data.entrySet()) {
             String regex = "\\{\\{\\s*((" + pair.getKey() + ")\\|?(.+)?" + ")\\s*\\}\\}";
