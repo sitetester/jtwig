@@ -18,7 +18,6 @@ public class JTwigTemplateParser {
 
         for (Map.Entry<String, String> pair : data.entrySet()) {
             String regex = "\\{\\{\\s*((" + pair.getKey() + ")\\|?(.+)?" + ")\\s*\\}\\}";
-            System.out.println(regex);
 
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(content);

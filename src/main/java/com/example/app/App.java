@@ -22,6 +22,5 @@ public class App {
         Path path = Paths.get("src/main/resources/", filename);
 
         String content = new JTwigTemplateParser().parseTemplate(path, data);
-        System.out.println(content);
     }
 }
