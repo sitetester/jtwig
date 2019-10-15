@@ -103,7 +103,30 @@ public class JTwigFiltersTest {
         Path path = Paths.get("src/test/resources/filters/join", "welcome.html");
 
         String content = new JTwigTemplateParser().parseTemplate(path, data);
-        System.out.println(content);
         assertTrue(content.contains("a|b|c"));
+    }
+
+    @Test
+    public void first() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someText", "abcd, defg, hijk");
+
+        Path path = Paths.get("src/test/resources/filters/first", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("abcd"));
+    }
+
+    @Test
+    public void last() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someText", "abcd, defg, hijk");
+
+        Path path = Paths.get("src/test/resources/filters/last", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("hijk"));
     }
 }

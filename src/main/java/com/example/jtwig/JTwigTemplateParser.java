@@ -45,11 +45,13 @@ public class JTwigTemplateParser {
                             arg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")"));
                         }
 
-                        String filterArg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")") - 1);
-
                         ArrayList<String> filterArgs = new ArrayList<>();
                         filterArgs.add(arg);
-                        filterArgs.add(filterArg);
+
+                        if (filterWithParams.indexOf("(") > 0) {
+                            String filterArg = filterWithParams.substring(filterWithParams.indexOf("(") + 2, filterWithParams.indexOf(")") - 1);
+                            filterArgs.add(filterArg);
+                        }
 
                         appliedValue = jTwigFilters.applyFilter(filter, filterArgs);
                     }

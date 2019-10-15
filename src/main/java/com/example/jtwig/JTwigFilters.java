@@ -59,6 +59,7 @@ public class JTwigFilters {
         filters.add("trim");
         filters.add("upper");
         filters.add("url_encode");
+        filters.add("first");
 
         return filters;
     }
@@ -79,39 +80,38 @@ public class JTwigFilters {
         return (String) method.invoke(jTwigFilters, filterArgs);
     }
 
-    public String upper(String value) {
-        return value.toUpperCase();
+    public String upper(ArrayList<String> filterArgs) {
+        return filterArgs.get(0).toUpperCase();
     }
 
-    public String lower(String value) {
-        return value.toLowerCase();
+    public String lower(ArrayList<String> filterArgs) {
+        return filterArgs.get(0).toLowerCase();
     }
 
-    public String title(String value) {
+    public String title(ArrayList<String> filterArgs) {
         // return value.to();
         // TODO: pending
         return "";
     }
 
-    public String capitalize(String value) {
-        String lowerCased = value.toLowerCase();
-
+    public String capitalize(ArrayList<String> filterArgs) {
+        String lowerCased = filterArgs.get(0).toLowerCase();
         String firstLetter = lowerCased.substring(0, 1).toUpperCase();
         String remainingChars = lowerCased.substring(1, lowerCased.length());
 
         return firstLetter + remainingChars;
     }
 
-    public String defaultVal(String value) {
-        return value;
+    public String defaultVal(ArrayList<String> filterArgs) {
+        return filterArgs.get(0);
     }
 
-    public String abs(String value) {
-        return String.valueOf(Math.abs(Integer.valueOf(value)));
+    public String abs(ArrayList<String> filterArgs) {
+        return String.valueOf(Math.abs(Integer.valueOf(filterArgs.get(0))));
     }
 
-    public String nl2br(String value) {
-        return value.replace("\n", "</br>");
+    public String nl2br(ArrayList<String> filterArgs) {
+        return filterArgs.get(0).replace("\n", "</br>");
     }
 
     public String join(ArrayList<String> filterArgs) {
@@ -127,5 +127,17 @@ public class JTwigFilters {
         }
 
         return partsJoined;
+    }
+
+    public String first(ArrayList<String> filterArgs) {
+        String[] parts = filterArgs.get(0).split(",");
+
+        return parts[0];
+    }
+
+    public String last(ArrayList<String> filterArgs) {
+        String[] parts = filterArgs.get(0).split(",");
+
+        return parts[parts.length - 1];
     }
 }
