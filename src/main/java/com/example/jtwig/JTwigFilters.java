@@ -19,7 +19,6 @@ public class JTwigFilters {
         filters.add("data_uri");
         filters.add("date");
         filters.add("date_modify");
-        filters.add("defaultVal");
         filters.add("escape");
         filters.add("filter");
         filters.add("format");
@@ -162,5 +161,9 @@ public class JTwigFilters {
         String[] parts = filterArgs.get(0).split(",");
 
         return parts[parts.length - 1];
+    }
+
+    public String reverse(ArrayList<String> filterArgs) {
+        return new StringBuilder(filterArgs.get(0)).reverse().toString();
     }
 }

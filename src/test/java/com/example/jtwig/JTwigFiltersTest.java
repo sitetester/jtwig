@@ -141,4 +141,16 @@ public class JTwigFiltersTest {
         String content = new JTwigTemplateParser().parseTemplate(path, data);
         assertTrue(content.contains("hijk"));
     }
+
+    @Test
+    public void reverse() throws InvocationTargetException, UnsupportedJTwigFilterException, IllegalAccessException, NoSuchMethodException, IOException {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("someNumber", "1234");
+
+        Path path = Paths.get("src/test/resources/filters/reverse", "welcome.html");
+
+        String content = new JTwigTemplateParser().parseTemplate(path, data);
+        assertTrue(content.contains("4321"));
+    }
 }
