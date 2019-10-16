@@ -19,6 +19,7 @@ public class JTwigFilters {
         filters.add("data_uri");
         filters.add("date");
         filters.add("date_modify");
+        filters.add("defaultVal");
         filters.add("escape");
         filters.add("filter");
         filters.add("format");
@@ -87,16 +88,10 @@ public class JTwigFilters {
         return filterArgs.get(0).toLowerCase();
     }
 
-    public String title(ArrayList<String> filterArgs) {
-        // return value.to();
-        // TODO: pending
-        return "";
-    }
-
     public String capitalize(ArrayList<String> filterArgs) {
         String lowerCased = filterArgs.get(0).toLowerCase();
         String firstLetter = lowerCased.substring(0, 1).toUpperCase();
-        String remainingChars = lowerCased.substring(1, lowerCased.length());
+        String remainingChars = lowerCased.substring(1);
 
         return firstLetter + remainingChars;
     }
@@ -116,21 +111,21 @@ public class JTwigFilters {
     public String join(ArrayList<String> filterArgs) {
         String[] parts = filterArgs.get(0).split(",");
 
-        String partsJoined = "";
+        StringBuilder partsJoined = new StringBuilder();
         int counter = 0;
         for (String part : parts) {
             counter++;
             if (counter > 0) {
-                partsJoined += filterArgs.get(1) + part.trim();
+                partsJoined.append(filterArgs.get(1)).append(part.trim());
             }
         }
 
-        return partsJoined;
+        return partsJoined.toString();
     }
 
     public String split(ArrayList<String> filterArgs) {
 
-        String partsJoined = "[";
+        StringBuilder partsJoined = new StringBuilder("[");
 
         if (filterArgs.get(0).indexOf(",") > 0) {
             String[] parts = filterArgs.get(0).split(",");
@@ -139,16 +134,16 @@ public class JTwigFilters {
             for (String part : parts) {
                 counter++;
                 if (counter > 1) {
-                    partsJoined += filterArgs.get(1) + " ";
+                    partsJoined.append(filterArgs.get(1)).append(" ");
                 }
 
-                partsJoined += part.trim();
+                partsJoined.append(part.trim());
             }
 
-            partsJoined += "]";
+            partsJoined.append("]");
         }
 
-        return partsJoined;
+        return partsJoined.toString();
     }
 
     public String first(ArrayList<String> filterArgs) {

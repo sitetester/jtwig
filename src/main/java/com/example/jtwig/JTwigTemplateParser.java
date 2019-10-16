@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class JTwigTemplateParser {
 
     private String checkIfFunctionUsed(String content) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-        String regex = "\\{\\{\\s*((.+)\\((.+)\\))\\s*\\}\\}";
+        String regex = "\\{\\{\\s*(([a-z]+)\\((.+)\\))\\s*\\}\\}";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
